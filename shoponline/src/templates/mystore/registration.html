@@ -1,0 +1,36 @@
+{% extends "mystore/base.html" %}
+
+{% block body_block %}
+<!-- Page Features -->
+<div class="row text-center">
+	 <!-- Page Features -->
+      <div class="text-center">
+      	{% if registered %}
+      		<font color="blue">You registered successful</font>
+      	{% else %}
+      		<h3>Fill out form register</h3><br>
+      		<form method="post" enctype="multipart/form-data">
+      			<table>
+      				{% for field in user_form %}
+      					<tr>
+      						<td>{{field.label}}</td>
+      						<td>{{field}}</td>
+      					</tr>
+      				{% endfor %}
+      				{% for field2 in profile_form %}
+      					<tr>
+      						<td>{{field2.label}}</td>
+      						<td>{{field2}}</td>
+      					</tr>
+      				{% endfor %}
+      				<tr>
+      					<td colspan="2" align="center"><input type="submit" class="btn btn-primary" value="Register" /></td>
+      				</tr>
+      			</table>
+      		{% csrf_token %}
+      		</form>
+      	{% endif %}
+      </div>
+      </div>
+      <!-- /.row -->
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends "mystore/base.html" %}
+
+{% block body_block %}
+<div class="row text-center"></div>
+<table align="center">
+<tr>
+<td valign="top" width='50%'>
+<h4>Customer</h4>
+<form action="." method="post">
+<table>
+{% for field in form %}
+<tr>
+<td>{{field.label}} </td>
+ <td>{{field}}</td>
+ </tr>
+{% endfor %}
+<tr>
+<td colspan="2" align="center">
+<p><input type ="submit" value = "Payment"
+class="btn btn-primary"></p>
+</td>
+</tr>
+</table>
+{% csrf_token %}
+</form>
+<br>
+</td>
+<td valign="top">
+<h4>Detailed Order</h4><i>(payment on delivery)</i>
+<ul>
+{% for item in cart %}
+<li>
+{{item.quantity}} x
+{{item.product.name}} = <span>{{item.total_fee}}</span>
+</li>
+{% endfor %}
+</ul>
+<ul>Total: {{cart.get_total_fee}} $</ul>
+</td>
+</tr>
+</table>
+</div>
+{% endblock %}

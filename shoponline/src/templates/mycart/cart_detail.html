@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+{% extends "mystore/base.html" %}
+
+{% block body_block %}
+    <h2>cart details</h2>
+    <table class="table">
+    <thead class="danger">
+    <th>product</th>
+    <th>product name</th>
+    <th>quantity</th>
+    <th>price ($)</th>
+    <th>amount ($)</th>
+    <th>delete</th>
+    </thead>
+    <tbody>
+        {% for item in cart %}
+        <tr>
+            <td><a href="{% url 'mystore:product_detail' item.product.pk %}"><img src="{{item.product.image.url}}" /></a></td>
+            <td>{{item.product.name}}</td>
+            <td>
+            <form action="{% url 'mycart:cart_add' item.product.pk %}" method="post">
+                {{item.update_quantity_form.quantity}}
+                {{item.update_quantity_form.update}}
+                <input type="submit" class="btn btn-primary" value="update" />
+                {% csrf_token %}
+            </form>
+            </td>
+            <td>{{item.fee}}</td>
+            <td>{{item.total_fee}}</td>
+            <td><a href="{% url 'mycart:cart_remove' item.product.pk %}">delete</a></td>
+        </tr>
+        {% endfor %}
+        <tr class="total">
+        <td colspan="4"></td>
+        <td class="num">total: {{cart.get_total_fee}} $</td>
+        </tr>
+    </tbody>
+</table>
+<div class="text-right">
+	<a href="{% url 'mystore:index' %}" class="button light">Order</a>
+	<hr>
+	<a href="{% url 'mystore:ordercreate' %}" class="btn btn-primary">Payment</a>
+	<br>
+</div>
+
+{% endblock %}

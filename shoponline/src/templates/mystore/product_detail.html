@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+{% extends "mystore/base.html" %}
+
+{% block body_block %}
+	 <!-- Page Features -->
+      <div class="row text-center">
+		{% if product %}
+        <div class="col-lg-3 col-md-6 mb-4">
+          <div class="card">
+            <img class="card-img-top" src="{{product.image.url}}" alt="{{product.name}}">
+            <div class="card-body">
+              <h4 class="card-title">{{product.name}}</h4>
+              <p class="card-text">{{product.description}}<br>{{product.fee}} $</p>
+            </div>
+            <div>
+              <form action="{% url 'mycart:cart_add' product.pk %}" method="post">
+                  {{cart_product_form}}
+                  {% csrf_token %}
+                  <div class="card-footer">
+                      <input type="submit" value="add to cart" class="btn btn-primary" />
+                  </div>              
+              </form>
+            </div>
+          </div>
+        </div>
+
+		{% endif %}
+      </div>
+      <!-- /.row -->
+{% endblock %}

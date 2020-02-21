@@ -1,0 +1,28 @@
+{% extends "mystore/base.html" %}
+
+{% block body_block %}
+<div class="row text-center">
+	 <!-- Page Features -->
+	 <div class="row text-center"><font color="red">{{login_result}}</font></div>
+      <div class="text-center">
+     	<h3>Log in</h3><br>
+      		<form method="post" action="{% url 'mystore:login' %}">
+      			<table>
+      				<tr>
+      					<td><lable for="username">Username:</lable></td>
+      					<td><input type="text" name="username" placeholder="enter username" /></td>
+      				</tr>
+      				<tr>
+      					<td><lable for="password">Password:</lable></td>
+      					<td><input type="password" name="password" placeholder="enter password" /></td>
+      				</tr>
+      				<tr>
+      					<td colspan="2" align="center"><input type="submit" class="btn btn-primary" value="Login" /></td>
+      				</tr>
+      			</table>
+      		{% csrf_token %}
+      		</form>
+      </div>
+      </div>
+      <!-- /.row -->
+{% endblock %}
